@@ -24,7 +24,8 @@ class CreateProceduresTable extends Migration
             $table->unsignedBigInteger('patient_visit_id');
             $table->foreign('patient_visit_id')
                 ->on('patient_visits')
-                ->references('id');
+                ->references('id')
+                ->onDelete('cascade');;
 
             $table->timestamps();
         });

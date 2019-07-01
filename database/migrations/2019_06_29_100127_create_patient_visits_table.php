@@ -14,6 +14,8 @@ class CreatePatientVisitsTable extends Migration
     public function up()
     {
         Schema::create('patient_visits', function (Blueprint $table) {
+
+            $adminUserTable = config('admin.database.users_table');
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('location_id');
@@ -21,20 +23,21 @@ class CreatePatientVisitsTable extends Migration
                 ->on('clinic_locations')
                 ->references('id');
 
-            $table->unsignedBigInteger('registered_by');
-            $table->foreign('registered_by')
-                ->on('users')
-                ->references('id');
-
-            $table->unsignedBigInteger('treated_by');
-            $table->foreign('treated_by')
-                ->on('users')
-                ->references('id');
-
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')
                 ->on('patients')
                 ->references('id');
+
+
+            $table->unsignedInteger('registered_by')->nullable();
+            $table->foreign('registered_by')
+                ->references('id')
+                ->on($adminUserTable);
+
+            $table->unsignedInteger('treated_by')->nullable();
+            $table->foreign('treated_by')
+                ->references('id')
+                ->on($adminUserTable);
 
 
             $table->timestamps();
@@ -48,6 +51,6 @@ class CreatePatientVisitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model_patients_visits');
+
     }
 }

@@ -21,8 +21,6 @@ class CreatePatientsTable extends Migration
             $table->string('surname')->nullable(false);
             $table->decimal('age')->nullable(false);
 
-
-
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ class HomeController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->title(config('admin.name').' Dashboard');
+            ->title(config('admin.name').' Dashboard')
+            ->view('admin.report.overview',[]);
+
     }
 }

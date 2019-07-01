@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Procedures extends Model
+class Procedure extends Model
 {
     public function patientvisit(){
 
-        return $this->belongsTo(PatientVisit::class);
+        return $this->hasOne(PatientVisit::class);
     }
 }
